@@ -1,15 +1,41 @@
-# Simple log parser for suspicious activity
+from collections import defaultdict
+from datetime import datetime, timedelta
+import re
 
-log_file = "logs/sample_logs.txt"  # path to your log file
+# Thresholds
+THRESHOLD = 3  # failed attempts
+TIME_WINDOW_MINUTES = 2  # time window in minutes
 
-try:
-    with open(log_file, "r") as f:
-        logs = f.readlines()
-except FileNotFoundError:
-    print(f"Error: Log file not found at {log_file}")
-    exit(1)
+# Store timestamps of failed logins per IP
+failed_attempts = defaultdict(list)
 
-print("Suspicious Events:")
-for line in logs:
-    if "Failed login" in line:
-        print(line.strip())
+# Open log file
+with open("logs/sample_logs.txt", "r") as file:
+    for line in file:
+        if "Failed login" in line:
+            # Extract timestamp and IP
+            match = re.search(r"(\d{4}-\d{2}-\d{2} \d{2}:\d{2}) .*IP (.+)", line)
+            if match:
+                timestamp_str = match.group(1)
+                ip = match.group(2).strip()
+                timestamp = datetime.strptime(timestamp_str, "%Y-%m-%d %H:%M")
+                failed_attempts[ip].append(timestamp)
+
+print("=== Brute Force Detection Report with Time Window ===\n")
+
+for ip, times in failed_attempts.items():
+    # Sort timestamps
+    times.sort()
+    alert_triggered = False
+
+    # Check sliding window
+    for i in range(len(times)):
+        window_start = times[i]
+        window_end = window_start + timedelta(minutes=TIME_WINDOW_MINUTES)
+        count = sum(1 for t in times if window_start <= t <= window_end)
+        if count >= THRESHOLD:
+            print(f"ALERT: Possible brute force attack from IP {ip} ({count} failed attempts in {TIME_WINDOW_MINUTES} minutes)")
+            alert_triggered = True
+            break
+    if not alert_triggered:
+        print(f"INFO: {ip} had {len(times)} failed attempts, below threshold")
