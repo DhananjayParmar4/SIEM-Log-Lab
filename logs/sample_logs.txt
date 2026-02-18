@@ -8,3 +8,12 @@
 2026-02-18 10:04 Failed login for user david from IP 45.33.21.90
 
 2026-02-18 10:10 Successful login for user alice from IP 10.0.0.5
+
+2026-02-18 10:05 Failed login for user admin from IP 203.0.113.5
+2026-02-18 10:06 Failed login for user john from IP 203.0.113.5
+2026-02-18 10:07 Failed login for user alice from IP 198.51.100.12
+2026-02-18 10:08 Failed login for user david from IP 198.51.100.12
+2026-02-18 10:09 Failed login for user alice from IP 203.0.113.5
+2026-02-18 10:10 Failed login for user john from IP 198.51.100.12
+2026-02-18 10:11 Failed login for user admin from IP 192.0.2.20
+2026-02-18 10:12 Failed login for user john from IP 192.0.2.20
