@@ -1,0 +1,2 @@
+INFO: 192.168.1.10 targeted 1 usernames, below threshold | Severity: Low
+ALERT: Possible password spraying from IP 45.33.21.90 (4 usernames targeted) | Severity: Medium
