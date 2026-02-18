@@ -39,14 +39,16 @@ report_lines = []
 for ip, users in failed_attempts.items():
     count = len(users)
     sev = severity_level(count)
+    last_attempt = max(timestamps[ip]).strftime("%Y-%m-%d %H:%M")
+    attack_type = "Password Spraying" if count >= USERNAME_THRESHOLD else "Failed Login"
+    
     if count >= USERNAME_THRESHOLD:
-        msg = f"ALERT: Possible password spraying from IP {ip} ({count} usernames targeted) | Severity: {sev}"
-        print(msg)
-        report_lines.append(msg)
+        msg = f"ALERT: {attack_type} from IP {ip} ({count} usernames) | Severity: {sev} | Last Attempt: {last_attempt}"
     else:
-        msg = f"INFO: {ip} targeted {count} usernames, below threshold | Severity: {sev}"
-        print(msg)
-        report_lines.append(msg)
+        msg = f"INFO: {ip} targeted {count} usernames | Severity: {sev} | Last Attempt: {last_attempt}"
+        
+    print(msg)
+    report_lines.append(msg)
 
 # Optional: save to incident report file
 with open("logs/incident_report.txt", "w") as f:
