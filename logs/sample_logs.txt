@@ -23,3 +23,11 @@
 2026-02-18 10:15 Failed login for user charlie from IP 203.0.113.5
 2026-02-18 10:16 Failed login for user david from IP 203.0.113.5
 2026-02-18 10:17 Failed login for user eve from IP 203.0.113.5
+
+2026-02-18 11:00 Web request from IP 203.0.113.8 | input: ' OR '1'='1
+2026-02-18 11:01 Web request from IP 203.0.113.9 | input: '; DROP TABLE users; --
+2026-02-18 11:02 Web request from IP 198.51.100.50 | input: normal_search_term
+
+2026-02-18 11:10 Email click from alice@company.com | URL: http://malicious-login.com
+2026-02-18 11:11 Email click from bob@company.com | URL: https://secure-update.net
+2026-02-18 11:12 Email click from charlie@company.com | URL: https://company.com/dashboard

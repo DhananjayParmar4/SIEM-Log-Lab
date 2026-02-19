@@ -1,0 +1,5 @@
+ALERT: Possible brute force attack from IP 192.168.1.10 (3 failed attempts)
+ALERT: Possible brute force attack from IP 45.33.21.90 (4 failed attempts)
+ALERT: Possible brute force attack from IP 203.0.113.5 (8 failed attempts)
+ALERT: Possible brute force attack from IP 198.51.100.12 (3 failed attempts)
+INFO: 192.0.2.20 had 2 failed attempts
