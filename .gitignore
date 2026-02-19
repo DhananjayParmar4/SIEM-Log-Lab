@@ -4,3 +4,6 @@ __pycache__/
 
 # Ignore system files
 .DS_Store
+
+# Ignore generated log reports
+logs/*.txt

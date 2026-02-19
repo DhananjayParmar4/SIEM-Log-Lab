@@ -1,6 +1,0 @@
-=== Web Attack Detection Report ===
-
-ALERT: SQL Injection attempt detected from IP 203.0.113.8 | Severity: High
-ALERT: SQL Injection attempt detected from IP 203.0.113.9 | Severity: High
-ALERT: Possible phishing link clicked by alice@company.com | Severity: Medium
-ALERT: Possible phishing link clicked by bob@company.com | Severity: Medium
