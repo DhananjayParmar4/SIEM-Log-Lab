@@ -6,4 +6,8 @@ __pycache__/
 .DS_Store
 
 # Ignore generated log reports
-logs/*.txt
+logs/brute_force_report.txt
+logs/password_spray_report.txt
+logs/web_attack_report.txt
+logs/master_incident_report.txt
+logs/incident_report.txt
