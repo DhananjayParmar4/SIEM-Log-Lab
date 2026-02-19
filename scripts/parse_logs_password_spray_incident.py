@@ -1,6 +1,7 @@
 from collections import defaultdict
 from datetime import datetime
 import re
+import os
 
 # Thresholds
 USERNAME_THRESHOLD = 3  # failed attempts on different usernames
@@ -34,8 +35,8 @@ with open("logs/sample_logs.txt", "r") as file:
 
 print("=== Password Spraying Detection Report with Severity ===\n")
 
+# Prepare report lines
 report_lines = []
-
 for ip, users in failed_attempts.items():
     count = len(users)
     sev = severity_level(count)
@@ -50,7 +51,18 @@ for ip, users in failed_attempts.items():
     print(msg)
     report_lines.append(msg)
 
-# Optional: save to incident report file
-with open("logs/incident_report.txt", "w") as f:
-    for line in report_lines:
-        f.write(line + "\n")
+# Ensure logs folder exists
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+os.makedirs(os.path.join(BASE_DIR, "logs"), exist_ok=True)
+
+# Save to password spray report
+PS_REPORT_FILE = os.path.join(BASE_DIR, "logs", "password_spray_report.txt")
+with open(PS_REPORT_FILE, "w") as ps:
+    ps.write("=== Password Spraying Detection Report ===\n\n")
+    if report_lines:
+        for line in report_lines:
+            ps.write(line + "\n")
+    else:
+        ps.write("No password spraying attacks detected.\n")
+
+print(f"Password Spraying report saved to {PS_REPORT_FILE}")
